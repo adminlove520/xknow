@@ -116,6 +116,17 @@ function ensureObsidianVault(vaultPath) {
   return false;
 }
 
+/**
+ * Add shared LLM options to a command
+ */
+function addLLMOptions(cmd) {
+  return cmd
+    .option('--api-key <key>', 'Override LLM API Key')
+    .option('--base-url <url>', 'Override LLM Base URL')
+    .option('--model <model>', 'Override LLM Model')
+    .option('--api-type <type>', 'Override API Protocol (openai|anthropic)');
+}
+
 program
   .name('xknow-cli')
   .description('Xknow-CLI - AI-First Knowledge Management Tool for OpenClaw Users, based on Karpathy LLM Knowledge Bases concept')
@@ -196,11 +207,11 @@ program
   });
 
 // compile command
-program
+addLLMOptions(program
   .command('compile')
   .description('Compile raw data into wiki pages (Dual-Layer: Refs & Concepts)')
   .option('-s, --source <source>', 'Specify source category')
-  .option('-f, --force', 'Force recompile all files')
+  .option('-f, --force', 'Force recompile all files'))
   .action(async (options) => {
     const config = loadConfig();
     const { compile } = await import('../lib/compile.js');
@@ -208,12 +219,12 @@ program
   });
 
 // query command
-program
+addLLMOptions(program
   .command('query')
   .description('Intelligent Q&A based on wiki context')
   .argument('<question>', 'Question to ask')
   .option('-f, --format <format>', 'Output format (markdown|slides|mermaid)', 'markdown')
-  .option('-s, --save', 'Save the result as a new concept article')
+  .option('-s, --save', 'Save the result as a new concept article'))
   .action(async (question, options) => {
     const config = loadConfig();
     const { query } = await import('../lib/query.js');
@@ -232,23 +243,23 @@ program
   });
 
 // lint command
-program
+addLLMOptions(program
   .command('lint')
-  .description('AI Librarian Health Check & Gap Analysis')
-  .action(async () => {
+  .description('AI Librarian Health Check & Gap Analysis'))
+  .action(async (options) => {
     const config = loadConfig();
     const { lint } = await import('../lib/lint.js');
-    await lint(config);
+    await lint(config, options);
   });
 
 // doctor command
-program
+addLLMOptions(program
   .command('doctor')
-  .description('Diagnose environment and configuration')
-  .action(async () => {
+  .description('Diagnose environment and configuration'))
+  .action(async (options) => {
     const config = loadConfig();
     const { doctor } = await import('../lib/doctor.js');
-    await doctor(config);
+    await doctor(config, options);
   });
 
 // init command

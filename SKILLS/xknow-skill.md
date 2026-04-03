@@ -9,13 +9,15 @@ description: "Xknow-CLI - AI-First Knowledge Management for OpenClaw Lobsters. U
 
 ## Configuration
 
-### 1. LLM API (OpenClaw Bridge)
+### 1. LLM API (OpenClaw Bridge & Overrides)
 
-xknow-cli automatically bridges your existing OpenClaw configuration:
-- **API Key**: Loaded from `~/.openclaw/agents/main/agent/auth_profiles.json`
-- **Model**: Loaded from `agents.defaults.model` (e.g., minimax/MiniMax-M2.7)
+xknow-cli automatically bridges your existing OpenClaw configuration. You can also manually override these via CLI options or environment variables.
 
-> **Note**: Auth profiles are stored per-agent. For the main agent, check `~/.openclaw/agents/main/agent/auth_profiles.json`.
+**Supported Overrides**:
+- `--api-key <key>` or `OPENAI_API_KEY`
+- `--base-url <url>` or `OPENAI_BASE_URL`
+- `--model <model>` or `OPENAI_MODEL`
+- `--api-type <type>` (openai|anthropic) or `OPENAI_API_TYPE`
 
 ### 2. Obsidian Vault
 
@@ -51,13 +53,15 @@ xknow-cli init --force      # Force reset everything
 xknow-cli compile                  # Compile raw -> wiki (incremental)
 xknow-cli compile --force          # Force full recompile
 xknow-cli compile --source notes   # Compile notes only
+# Example with explicit LLM:
+xknow-cli compile --model deepseek/deepseek-chat --base-url https://api.deepseek.com
 ```
 
 ### query - Intelligent Q&A (Synthesis)
 ```bash
 xknow-cli query "What are the key design choices?" --format slides --save
 ```
-*Tip: Use `--save` to persist the synthesis back into your KB.*
+*Tip: Use `--save` to persist the synthesis back into your KB. Agents can pass `--base-url` and `--api-key` to ensure correct LLM connectivity.*
 
 ### search - Fast Local Search
 ```bash
