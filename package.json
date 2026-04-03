@@ -1,6 +1,6 @@
 {
   "name": "xknow-cli",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Xknow-CLI - AI-First Knowledge Management Tool for OpenClaw Users with MCP Support",
   "main": "index.js",
   "bin": {
