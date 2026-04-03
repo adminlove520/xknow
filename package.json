@@ -1,6 +1,6 @@
 {
   "name": "xknow-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Xknow CLI - AI-First Knowledge Management Tool for OpenClaw Users, based on Karpathy LLM Knowledge Bases concept",
   "main": "index.js",
   "bin": {
