@@ -5,8 +5,13 @@ import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
 import { expandHome, getOpenClawApiKey, getOpenClawModel } from '../lib/config.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf8'));
 
 const program = new Command();
 
@@ -114,7 +119,7 @@ function ensureObsidianVault(vaultPath) {
 program
   .name('xknow-cli')
   .description('Xknow-CLI - AI-First Knowledge Management Tool for OpenClaw Users, based on Karpathy LLM Knowledge Bases concept')
-  .version('1.0.0');
+  .version(pkg.version);
 
 // config command
 program
