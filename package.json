@@ -1,7 +1,7 @@
 {
   "name": "xknow-cli",
-  "version": "1.2.1",
-  "description": "Xknow CLI - AI-First Knowledge Management Tool for OpenClaw Users, based on Karpathy LLM Knowledge Bases concept",
+  "version": "1.2.2",
+  "description": "Xknow-CLI - AI-First Knowledge Management Tool for OpenClaw Users, based on Karpathy LLM Knowledge Bases concept",
   "main": "index.js",
   "bin": {
     "xknow-cli": "bin/xknow-cli.js"
@@ -10,7 +10,6 @@
     "compile": "node lib/compile.js",
     "query": "node lib/query.js",
     "lint": "node lib/lint.js",
-    "sync": "node lib/sync.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
